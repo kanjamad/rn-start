@@ -9,6 +9,8 @@ const ListScreen = () => {
         {name: 'Friend 4', age:27},
         {name: 'Friend 5', age: 53},
         {name: 'Friend 6', age:30},
+        {name: 'Friend 7', age:100},
+        {name: 'Friend 9', age:10},
     ];
 
     return(
