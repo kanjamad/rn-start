@@ -9,14 +9,13 @@ const CounterScreen = () =>{
         <View>
             {/* <Button title="Increase" onPress={()=>{}} /> */}
             <Button title="Increase" onPress={()=>{
-                counter++;
-                console.log(counter);
+                //Don't do this because we not varifly variable direactly (counter++);
+                // console.log(counter);
+                setCounter(counter + 1);
                 
             }} />
             <Button title="Decrease" onPress={()=>{
-                counter--;
-                console.log(counter);
-                
+                setCounter(counter -1);
             }} />
 <Text> Current Count: {counter} </Text>
         </View>
