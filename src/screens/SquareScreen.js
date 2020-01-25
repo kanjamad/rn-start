@@ -1,74 +1,98 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import ColorCounter from '../components/ColorCounter';
 
 const COLOR_INCREMENT = 15;
 
+// const reducer = (state, howToChangeStateObject) => {
+const reducer = (state, action) => {
+    // state === {red: number, green:number, blue:number};
+    // action mean how to change state object
+    // action === {colorToChange:'red'||'green'|| 'blue', amount:15 || -15 }
+    switch (action.colorToChange) {
+        case 'red':
+            // inspac action
+            // Never do this->  state.red =state.red - 15;
+            return { ...state, red: state.red + action.amount};
+            /* So what's going on with the syntax right here.
+
+                Well it's essentially means make a brand new object so that's where we are assembling a new object.
+
+                We're then going to take all the existing properties out of our state object and we're going to essentially
+
+                copy paste them into this new one then we're going to overwrite the existing red property and the new
+
+                value for red will be state plus red plus action dot amount.
+
+                So with this code right here we are not making any change whatsoever to our state object.
+
+                Instead we are copy pasting all the values out of it adding them to this new object and then making
+
+                a change to the new object.
+
+                So no change has been made to the original state object which is exactly what we want.
+
+                We don't want to make any change directly to state */
+
+            // ---------------------
+            /* 
+            
+                return { ...state, red: state.red + action.amount};
+                return { red: 0, green:0, blue:0, red: state.red + action.amount};
+                imagine that with this dot dot
+
+                dot state that essentially gets changed at runtime into something like this.
+
+                So again with the dot dot dot state we take all the values out of state which is red green and blue
+
+                and we essentially copy paste them into this new object that includes the red property.
+
+                But now we've redefined red to the right hand side of the existing one.
+
+                When we redefine a new property like so later on INSIDE AN OBJECT it overwrite the existing one.
+
+                So essentially this red of 0 right here gets deleted and we end up with just green of zero blue of 0
+
+                and red of the new value.
+
+                So that's what's really going on with that syntax */
+
+                            /* From our reducer function.
+
+                            So whenever we call this reduce our function or whenever it gets called by react automatically in every
+
+                            scenario no matter what we are always returning a new object to be used as our state.*/
+        case 'green':
+            return { ...state, green: state.green + action.amount};
+        case 'blue':
+            return { ...state, blue: state.blue + action.amount};
+        default:
+            return state;
+
+    }
+
+};
 const SquareScreen = () => {
-    const [red, setRed] = useState(0);
-    const [green, setGreen] = useState(0);
-    const [blue, setBlue] = useState(0);
 
-    const setColor = (color, change) =>{
-        // color === 'red', 'green', 'blue'
-        // change === +15, -15
-
-        switch (color){
-            case 'red':
-                // A ternary Expression
-                    // a Turner expression is going to essentially check one statement and then
-                    // if that statement evaluates to a truth you value it will run some immediate statement like in this case return.
-                    // Otherwise it will run some other statement like set red.
-                        // So essentially ternary is going to do exactly what we have with our if statement right here already.
-                        // But it's just going to kind of condense down this logic
-                red + change > 255 || red +change < 0 ? null : setRed(red + change);
-                            /* so to do so I would write out red plus change greater than two fifty five 
-                            or read plus change less than zero.
-                            And here 's where the ternary comes in we'll put in a question mark? like so the question mark means that
-                            this is going to be the expression we want to run.
-                            If all this evaluates to a truth we value unfortunately we cannot
-                            return directly from a ternary statement.
-                            So instead we 're just going to evaluate this expression to null like so that essentially means don't do anything.*/
-                            /* otherwise.
-                            So I'll put a colon :  in there and that means if this is flasy then do this.
-                            And in this case I want to update red by calling set red with red plus change*/
-                // --------------------------
-                // If statment
-                            // if(red + change > 255 || red + change < 0){
-                            //     return;
-                            // }else{
-                            //     setRed(red + change);
-                            // }
-                return;
-
-            case 'green':
-                green + change > 225 || green + change < 0 ? null : setGreen(green + change);
-                return;
-            case 'blue':
-            blue + change > 225 || blue + change < 0 ? null : setBlue(blue + change);
-                return;
-            default:
-                return;
-
-        }
-    };
+    const [state, dispatch] = useReducer(reducer, {red: 0, green:0, blue:0});
+    console.log(state) //{red:0, green:0,blue:0}
 
 
     return (
         <View>
             <ColorCounter 
-            onIncrease={() =>setColor('red', COLOR_INCREMENT)} 
-            onDecrease={() =>setColor('red', -1 * COLOR_INCREMENT)} 
+            onIncrease={() => } 
+            onDecrease={() => } 
             color="Red"
             />
             <ColorCounter 
-            onIncrease = { () => setColor('green', COLOR_INCREMENT)}
-            onDecrease = { () => setColor('green', -1 * COLOR_INCREMENT)}
+            onIncrease = { () => }
+            onDecrease = { () =>  }
             color="Green"
             />
             <ColorCounter 
-            onIncrease = { () =>setColor('blue', COLOR_INCREMENT)}
-            onDecrease = { () =>setColor('blue', -1 * COLOR_INCREMENT)}
+            onIncrease = { () => }
+            onDecrease = { () => }
             color="Blue"
             />
             <View style={{
