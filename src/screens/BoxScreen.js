@@ -16,7 +16,11 @@ const styles = StyleSheet.create({
     },
     textStyle:{
         borderWidth:1,
-        borderColor:'red'
+        borderColor:'red',
+        // marginHorizontal:20,
+        // marginVertical:20,
+        margin:20,
+        
     },
 
 });
