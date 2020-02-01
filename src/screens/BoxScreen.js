@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         borderColor:'black',
         height: 200,
         // flexDirection:'row',
-        alignItems:'center'
+        alignItems:'stretch'
         
     },
     textOneStyle:{
@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
     },
     textTwoStyle:{
         borderWidth:2,
-        borderColor:'red',
-        alignSelf:'flex-start'
+        borderColor:'yellow',
+        color:'yellow',
+        position:'absolute'
     },
     textThreeStyle: {
         borderWidth: 2,
