@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         borderWidth:3,
         borderColor:'black',
         height: 200,
+        flexDirection:'row',
         justifyContent:'space-between',
     },
     textStyle:{
